@@ -28,7 +28,7 @@ services:
         max_attempts: 3
         window: 120s
     environment:
-      - POSTGRES_PASSWORD={{ ODB_PASSWORD }}
+      - POSTGRES_PASSWORD=admin
       - POSTGRES_USER=zato
 
   redis:
@@ -54,24 +54,24 @@ services:
         max_attempts: 3
         window: 120s
     environment:
-      - VERBOSE={{ VERBOSE or "n" }}
-      - LB_HOSTNAME={{ LB_HOSTNAME or "zato_lb" }}
-      - LB_PORT={{ LB_PORT or 80 }}
-      - LB_AGENT_PORT={{ LB_AGENT_PORT or 20151 }}
-      - CLUSTER_NAME={{ CLUSTER_NAME or uuidv4 }}
-      - SECRET_KEY={{ SECRET_KEY }}
-      - JWT_SECRET_KEY={{ JWT_SECRET_KEY }}
+      - VERBOSE=y
+      - LB_HOSTNAME=zato_lb
+      - LB_PORT=80
+      - LB_AGENT_PORT=20151
+      - CLUSTER_NAME=zato
+      - SECRET_KEY=asasadsa
+      - JWT_SECRET_KEY=asdasdsa
       - ZATO_POSITION=scheduler
-      - ZATO_WEB_ADMIN_PASSWORD={{ ZATO_WEB_ADMIN_PASSWORD }}
-      - ZATO_ADMIN_INVOKE_PASSWORD={{ ZATO_ADMIN_INVOKE_PASSWORD }}
-      - ZATO_IDE_PUBLISHER_PASSWORD={{ IDE_PUBLISHER_PASSWORD }}
+      - ZATO_WEB_ADMIN_PASSWORD=admin
+      - ZATO_ADMIN_INVOKE_PASSWORD=admin
+      - ZATO_IDE_PUBLISHER_PASSWORD=admin
       - REDIS_HOSTNAME=redis
       - ODB_TYPE=postgresql
       - ODB_HOSTNAME=postgres
       - ODB_PORT=5432
       - ODB_NAME=zato
       - ODB_USERNAME=zato
-      - ODB_PASSWORD={{ ODB_PASSWORD }}
+      - ODB_PASSWORD=admin
     depends_on:
       - redis
       - postgres
@@ -79,24 +79,24 @@ services:
   zato_bootstrap:
     image: registry.gitlab.com/zatosource/docker-registry/cloud:3.1
     environment:
-      - VERBOSE={{ VERBOSE or "n" }}
-      - LB_HOSTNAME={{ LB_HOSTNAME or "zato_lb" }}
-      - LB_PORT={{ LB_PORT or 80 }}
-      - LB_AGENT_PORT={{ LB_AGENT_PORT or 20151 }}
-      - CLUSTER_NAME={{ CLUSTER_NAME or uuidv4 }}
-      - SECRET_KEY={{ SECRET_KEY }}
-      - JWT_SECRET_KEY={{ JWT_SECRET_KEY }}
+      - VERBOSE=y
+      - LB_HOSTNAME=zato_lb
+      - LB_PORT=80
+      - LB_AGENT_PORT=20151
+      - CLUSTER_NAME=zato
+      - SECRET_KEY=asasadsa
+      - JWT_SECRET_KEY=asdasdsa
       - ZATO_POSITION=scheduler
-      - ZATO_WEB_ADMIN_PASSWORD={{ ZATO_WEB_ADMIN_PASSWORD }}
-      - ZATO_ADMIN_INVOKE_PASSWORD={{ ZATO_ADMIN_INVOKE_PASSWORD }}
-      - ZATO_IDE_PUBLISHER_PASSWORD={{ IDE_PUBLISHER_PASSWORD }}
+      - ZATO_WEB_ADMIN_PASSWORD=admin
+      - ZATO_ADMIN_INVOKE_PASSWORD=admin
+      - ZATO_IDE_PUBLISHER_PASSWORD=admin
       - REDIS_HOSTNAME=redis
       - ODB_TYPE=postgresql
       - ODB_HOSTNAME=postgres
       - ODB_PORT=5432
       - ODB_NAME=zato
       - ODB_USERNAME=zato
-      - ODB_PASSWORD={{ ODB_PASSWORD }}
+      - ODB_PASSWORD=admin
     depends_on:
       - redis
       - postgres
@@ -106,25 +106,23 @@ services:
     deploy:
       labels:
         - traefik.enable=true
-        - traefik.port={{ LB_PORT or 17010  }}
-        - traefik.basic.frontend.rule=Host:{{ LB_HOSTNAME or "zato_lb" }}
-        - traefik.basic.port={{ LB_PORT or 17010 }}
+        - traefik.port=17010
+        - traefik.basic.frontend.rule=Host:zato_lb
+        - traefik.basic.port=17010
         - traefik.backend.healthcheck.path=/zato/ping
         - traefik.docker.network=zato_backend
         - traefik.http.middlewares.testHeader.Headers.CustomRequestHeaders.X-Auth-Token=True
         - traefik.http.middlewares.testHeader.Headers.CustomResponseHeaders.X-Auth-Token=True
     labels:
       - traefik.enable=true
-      - traefik.port={{ LB_PORT or 17010 }}
-      - traefik.basic.frontend.rule=Host:{{ LB_HOSTNAME or "zato_lb" }}
-      - traefik.basic.port={{ LB_PORT or 17010 }}
+      - traefik.port=17010
+      - traefik.basic.frontend.rule=Host:zato_lb
+      - traefik.basic.port=17010
       - traefik.backend.healthcheck.path=/zato/ping
       - traefik.docker.network=zato_backend
       - traefik.http.middlewares.testHeader.Headers.CustomRequestHeaders.X-Auth-Token=True
       - traefik.http.middlewares.testHeader.Headers.CustomResponseHeaders.X-Auth-Token=True
     image: registry.gitlab.com/zatosource/docker-registry/cloud:3.1
-    {% if HOTDEPLOY %}volumes:
-      - /home/docker/hotdeploy/:/opt/hot-deploy/{% endif %}
     deploy:
       replicas: 2
       update_config:
@@ -136,33 +134,32 @@ services:
         max_attempts: 3
         window: 120s
     environment:
-      - VERBOSE={{ VERBOSE or "n" }}
-      - LB_HOSTNAME={{ LB_HOSTNAME or "zato_lb" }}
-      - LB_PORT={{ LB_PORT or 80 }}
-      - LB_AGENT_PORT={{ LB_AGENT_PORT or 20151 }}
-      - CLUSTER_NAME={{ CLUSTER_NAME or uuidv4 }}
-      - SECRET_KEY={{ SECRET_KEY }}
-      - JWT_SECRET_KEY={{ JWT_SECRET_KEY }}
+      - VERBOSE=y
+      - LB_HOSTNAME=zato_lb
+      - LB_PORT=80
+      - LB_AGENT_PORT=20151
+      - CLUSTER_NAME=zato
+      - SECRET_KEY=asasadsa
+      - JWT_SECRET_KEY=asdasdsa
       - ZATO_POSITION=scheduler
-      - ZATO_WEB_ADMIN_PASSWORD={{ ZATO_WEB_ADMIN_PASSWORD }}
-      - ZATO_ADMIN_INVOKE_PASSWORD={{ ZATO_ADMIN_INVOKE_PASSWORD }}
-      - ZATO_IDE_PUBLISHER_PASSWORD={{ IDE_PUBLISHER_PASSWORD }}
+      - ZATO_WEB_ADMIN_PASSWORD=admin
+      - ZATO_ADMIN_INVOKE_PASSWORD=admin
+      - ZATO_IDE_PUBLISHER_PASSWORD=admin
       - REDIS_HOSTNAME=redis
       - ODB_TYPE=postgresql
       - ODB_HOSTNAME=postgres
       - ODB_PORT=5432
       - ODB_NAME=zato
       - ODB_USERNAME=zato
-      - ODB_PASSWORD={{ ODB_PASSWORD }}
+      - ODB_PASSWORD=admin
 
-      {% if ZATO_ENMASSE_FILE %}- ZATO_ENMASSE_FILE={{ ZATO_ENMASSE_FILE }}{% endif %}
     depends_on:
       - redis
       - postgres
       - zato_scheduler
       - zato_lb
     ports:
-      - {{ LB_PORT or 17010 }}
+      - 17010
     networks:
       - default
       - backend
@@ -176,24 +173,24 @@ services:
         max_attempts: 3
         window: 120s
     environment:
-      - VERBOSE={{ VERBOSE or "n" }}
-      - LB_HOSTNAME={{ LB_HOSTNAME or "zato_lb" }}
-      - LB_PORT={{ LB_PORT or 80 }}
-      - LB_AGENT_PORT={{ LB_AGENT_PORT or 20151 }}
-      - CLUSTER_NAME={{ CLUSTER_NAME or uuidv4 }}
-      - SECRET_KEY={{ SECRET_KEY }}
-      - JWT_SECRET_KEY={{ JWT_SECRET_KEY }}
+      - VERBOSE=y
+      - LB_HOSTNAME=zato_lb
+      - LB_PORT=80
+      - LB_AGENT_PORT=20151
+      - CLUSTER_NAME=zato
+      - SECRET_KEY=asasadsa
+      - JWT_SECRET_KEY=asdasdsa
       - ZATO_POSITION=scheduler
-      - ZATO_WEB_ADMIN_PASSWORD={{ ZATO_WEB_ADMIN_PASSWORD }}
-      - ZATO_ADMIN_INVOKE_PASSWORD={{ ZATO_ADMIN_INVOKE_PASSWORD }}
-      - ZATO_IDE_PUBLISHER_PASSWORD={{ IDE_PUBLISHER_PASSWORD }}
+      - ZATO_WEB_ADMIN_PASSWORD=admin
+      - ZATO_ADMIN_INVOKE_PASSWORD=admin
+      - ZATO_IDE_PUBLISHER_PASSWORD=admin
       - REDIS_HOSTNAME=redis
       - ODB_TYPE=postgresql
       - ODB_HOSTNAME=postgres
       - ODB_PORT=5432
       - ODB_NAME=zato
       - ODB_USERNAME=zato
-      - ODB_PASSWORD={{ ODB_PASSWORD }}
+      - ODB_PASSWORD=admin
     depends_on:
       - redis
       - postgres
@@ -201,7 +198,7 @@ services:
       - zato_lb
       - zato_server
     ports:
-      - {{ ZATO_WEB_ADMIN_PORT or 8183 }}:8183
+      - 8183:8183
 
   zato_lb:
     image: traefik
