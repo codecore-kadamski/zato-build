@@ -1,9 +1,0 @@
-*~
-~
-*.cert.pem
-*.crt
-*.pem
-*_private_key
-**/test_results/
-**/files/*.zip
-**/files/*.rpm

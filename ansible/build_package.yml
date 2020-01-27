@@ -1,9 +1,0 @@
----
-
-- hosts: "{{ host }}"
-  become: True
-
-  roles:
-
-    - build_package
-    - fetch_package

@@ -1,9 +1,0 @@
----
-
-ip: 10.5.5.31
-servers:
-  zato-server1:
-    component_path: /opt/zato/env/server
-    port: 17010
-    workers: 1
-    created: false

@@ -1,3 +1,0 @@
-#!/bin/sh -e
-
-exec /etc/init.d/zato stop

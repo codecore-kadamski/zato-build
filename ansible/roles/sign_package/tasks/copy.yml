@@ -1,7 +1,0 @@
----
-
-- name: Copy a Zato package to sign-deb box
-  copy:
-    src: "{{ playbook_dir }}/output/{{ system }}/{{ zato_package }}"
-    dest: /opt/aptly/incoming/{{ distro }}/{{ codename }}/
-    force: yes

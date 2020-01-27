@@ -1,8 +1,0 @@
----
-
-- name: Generate variables for {{ system }} box
-  hosts: localhost
-
-  roles:
-
-    - generate_host_vars

@@ -1,7 +1,0 @@
----
-
-- include: d_install_zato.yml
-- include: install_redis.yml
-- include: install_postgresql.yml
-- include: d_create_zato_certificates.yml
-- include: d_create_zato_components.yml

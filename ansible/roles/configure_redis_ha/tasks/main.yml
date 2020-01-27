@@ -1,5 +1,0 @@
----
-
-- include: configure.yml
-- include: start_nodes.yml
-- include: start_sentinels.yml

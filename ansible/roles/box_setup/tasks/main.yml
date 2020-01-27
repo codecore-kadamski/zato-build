@@ -1,6 +1,0 @@
----
-
-- include: install.yml
-  become_user: root
-- include: create_user.yml
-  become_user: root

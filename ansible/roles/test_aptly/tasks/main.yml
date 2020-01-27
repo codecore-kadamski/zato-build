@@ -1,5 +1,0 @@
----
-
-- include: prepare_variables.yml
-- include: install_zato.yml
-- include: check_result.yml

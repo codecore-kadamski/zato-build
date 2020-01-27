@@ -1,8 +1,0 @@
----
-
-- include: prepare_common.yml
-- include: prepare_debian.yml
-  when: ansible_os_family == "Debian"
-- include: prepare_rhel.yml
-  become_user: root
-  when: ansible_distribution == "CentOS"

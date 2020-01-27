@@ -1,8 +1,0 @@
----
-
-- hosts: "{{ hostname }}"
-  become: True
-
-  roles:
-
-    - create_quickstart

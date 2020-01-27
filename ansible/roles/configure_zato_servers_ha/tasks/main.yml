@@ -1,7 +1,0 @@
----
-
-- include: configure.yml
-  become_user: zato
-
-- include: restart.yml
-  become_user: zato

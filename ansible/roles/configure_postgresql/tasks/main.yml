@@ -1,4 +1,0 @@
----
-
-- include: configure.yml
-  become_user: postgres

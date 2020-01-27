@@ -1,6 +1,0 @@
----
-
-- include: install_programs.yml
-  tags: install_programs
-- include: build.yml
-  tags: build_package

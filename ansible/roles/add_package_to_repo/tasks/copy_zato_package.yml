@@ -1,7 +1,0 @@
----
-
-- name: Copy a Zato package to a deb repo-box
-  copy: >
-    src=./output/{{ system }}/{{ zato_package }}
-    dest=/opt/aptly/incoming/{{ distro }}/{{ codename }}/
-    force=yes
